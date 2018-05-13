@@ -1,11 +1,11 @@
 from telegram.ext import Updater, CommandHandler
-import CryptoParser
+import parser
 import logging
 from dateutil import parser as date_parser
 import time
 import os
 
-with open('help.txt', 'r') as input_file:
+with open('readme.txt', 'r') as input_file:
     support_text = input_file.read()
 
 
@@ -16,7 +16,7 @@ def start(bot, update):
 def bot_crate(bot, update):
     bot.send_message(
         chat_id=update.message.chat_id,
-        text=CryptoParser.crate(*update.message.text.split()[1:]))
+        text=parser.crate(*update.message.text.split()[1:]))
 
 
 def bot_history(bot, update):
@@ -24,7 +24,7 @@ def bot_history(bot, update):
     del message_text[0]
     begin_time = time.mktime(date_parser.parse(message_text[1]).timetuple())
     end_time = time.mktime(date_parser.parse(message_text[2]).timetuple())
-    CryptoParser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
+    parser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
     bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
     os.remove('./tmp_fig.png')
 
