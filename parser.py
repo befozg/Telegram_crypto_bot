@@ -9,10 +9,10 @@ import datetime
 
 class ConvertArgumentTypes(object):
     """
-    Converting of function's args
-    to specified types.
+    Переводим аргументы args функции f 
+    в специализированные типы для удобной
+    работы.
     """
-
     def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
@@ -31,6 +31,11 @@ class ConvertArgumentTypes(object):
 
 @ConvertArgumentTypes(str, str)
 def crate(crypt_codes, crypt_to='USD'):
+    """
+    :param crypt_codes: Крипт, который надо перевести
+    :param crypt_to=USD: Крипт, в который надо перевести 
+    :return: текущее значение crypt в эквивалентах crypt_to
+    """
     response = json.loads(
         urllib.request.urlopen(
             'https://min-api.cryptocompare.com/data/price?fsym=' +
@@ -40,6 +45,16 @@ def crate(crypt_codes, crypt_to='USD'):
 
 @ConvertArgumentTypes(str, int, int, str, str)
 def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, crypt_to='USD'):
+    """
+    С помощью специальных библиотек парсит информацию с указанной ссылки, и 
+    по следующим аргументам выводит историю изменения курса:
+    :param crypt_codes: Крипт, который надо перевести
+    :param begin_time: Время,начиная с которого надо просчитать историю изменения курса
+    :param end_time: Время,до с которого надо просчитать историю изменения курса
+    :param resolution: Шаг разделения временного промежутка (день и т.п.)
+    :param crypt_to=USD: Крипт, в который надо перевести 
+    :return: текущее значение crypt в эквивалентах crypt_to
+    """
     api_res = {'minute': 1, 'hour': 60, 'day': 1440}
     limit = (end_time - begin_time) // (api_res[resolution] * 60)
     request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(

@@ -1,0 +1,5 @@
+Инструкция по командам:
+/crate - принимает аргументы crypt, crypt_to=USD; выводит текущее значение crypt в эквивалентах crypt_to
+/history - принимает аргументы crypt_code, begin_date, end_date, resolution, crypt_to; возвращает график изменения crypt_code в эквивалентах crypt_to в промежуток begin_date, end_date, размер шага деления промежутка задается параметром resolution(day, hour, minute).
+/help - для вывода вспомогательной информации еще раз.
+
