@@ -29,7 +29,7 @@ def help(bot, update):
 def bot_crate(bot, update):
     """
     Отвечает за команду /crate и отправляет в chat_id значение, возвращаемое
-    parser_crate.
+    parser_crate./home/karen
     """
     bot.send_message(
         chat_id=update.message.chat_id,

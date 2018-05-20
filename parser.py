@@ -30,7 +30,7 @@ class ConvertArgumentTypes(object):
 
 
 @ConvertArgumentTypes(str, str)
-def crate(crypt_codes, crypt_to='USD'):
+def crate(crypt_codes='USD', crypt_to='RUB'):
     """
     :param crypt_codes: Крипт, который надо перевести
     :param crypt_to=USD: Крипт, в который надо перевести 
@@ -44,7 +44,7 @@ def crate(crypt_codes, crypt_to='USD'):
 
 
 @ConvertArgumentTypes(str, int, int, str, str)
-def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, crypt_to='USD'):
+def history(crypt_codes="USD", begin_time='2018.04.01', end_time='2018.05.01', resolution='day', crypt_to='RUB'):
     """
     С помощью специальных библиотек парсит информацию с указанной ссылки, и 
     по следующим аргументам выводит историю изменения курса:
