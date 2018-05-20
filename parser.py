@@ -5,7 +5,6 @@ import json
 import urllib.request
 import matplotlib.dates
 import datetime
-from datetime import datetime
 
 
 class ConvertArgumentTypes(object):
@@ -45,7 +44,7 @@ def crate(crypt_codes='USD', crypt_to='RUB'):
 
 
 @ConvertArgumentTypes(str, int, int, str, str)
-def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, crypt_to='USD'):
+def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, crypt_to: str):
     """
     С помощью специальных библиотек парсит информацию с указанной ссылки, и 
     по следующим аргументам выводит историю изменения курса:
