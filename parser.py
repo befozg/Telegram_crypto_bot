@@ -45,7 +45,7 @@ def crate(crypt_codes='USD', crypt_to='RUB'):
 
 
 @ConvertArgumentTypes(str, int, int, str, str)
-def history(crypt_codes="USD", begin_time=2017 
+def history(crypt_codes="USD", begin_time=2017, 
             end_time=2019, resolution="day", crypt_to="RUB"):
     """
     С помощью специальных библиотек парсит информацию с указанной ссылки, и 
