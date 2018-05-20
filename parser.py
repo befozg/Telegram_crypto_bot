@@ -71,5 +71,5 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
         mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
         mat_pyplot.savefig('tmp_fig.png')
         mat_pyplot.close()
-    except Exception:
+    except IndexError:
         print('Вводить надо в формате /history и аргументы :)')
