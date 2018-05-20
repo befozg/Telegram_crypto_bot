@@ -41,14 +41,17 @@ def bot_history(bot, update):
     Отвечает за команду /hystory и отправляет в chat_id фото графика,
     показывающаге историю изменения курса.
     """
-    message_text = update.message.text.split()
-    del message_text[0]
-    begin_time = time.mktime(date_parser.parse(message_text[1]).timetuple())
-    end_time = time.mktime(date_parser.parse(message_text[2]).timetuple())
-    parser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
-    bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
-    os.remove('./tmp_fig.png')
-
+    try:
+        message_text = update.message.text.split()
+        del message_text[0]
+        begin_time = time.mktime(date_parser.parse(message_text[1]).timetuple())
+        end_time = time.mktime(date_parser.parse(message_text[2]).timetuple())
+        parser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
+        bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
+        os.remove('./tmp_fig.png')
+    except IndexError:
+        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в формате /history и аргументы :)')
+        
 
 def run_bot(token):
     """
