@@ -55,7 +55,7 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     :param crypt_to=USD: Крипт, в который надо перевести 
     :return: текущее значение crypt в эквивалентах crypt_to
     """
-     try:
+    try:
         api_res = {'minute': 1, 'hour': 60, 'day': 1440}
         limit = (end_time - begin_time) // (api_res[resolution] * 60)
         request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(
