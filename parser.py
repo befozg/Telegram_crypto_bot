@@ -45,8 +45,8 @@ def crate(crypt_codes='USD', crypt_to='RUB'):
 
 
 @ConvertArgumentTypes(str, int, int, str, str)
-def history(crypt_codes="USD", begin_time=datetime(2018,4,1), 
-            end_time=datetime(2018, 4, 11), resolution='day', crypt_to='RUB'):
+def history(crypt_codes="USD", begin_time=datetime.now(), 
+            end_time=datetime.now(), resolution="day", crypt_to="RUB"):
     """
     С помощью специальных библиотек парсит информацию с указанной ссылки, и 
     по следующим аргументам выводит историю изменения курса:
