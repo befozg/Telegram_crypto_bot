@@ -47,8 +47,11 @@ def bot_history(bot, update):
         begin_time = time.mktime(date_parser.parse(message_text[1]).timetuple())
         end_time = time.mktime(date_parser.parse(message_text[2]).timetuple())
         parser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
-        bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
-        os.remove('./tmp_fig.png')
+        if(begin_time < '2010.01.01") or (end_time> '2018.05.20'):
+            bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в промежутке 2010 - 2018гг. :)')
+        else:
+            bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
+            os.remove('./tmp_fig.png')
     except IndexError:
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в формате /history и аргументы :)')
         
