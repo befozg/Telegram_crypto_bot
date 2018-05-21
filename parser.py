@@ -60,7 +60,7 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(
         limit) + '&toTs=' + str(end_time)
     response = json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
-    if(bool(response) is False):
+    if(bool(response)):
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
     else:
         dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
