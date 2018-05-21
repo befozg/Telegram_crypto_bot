@@ -58,7 +58,7 @@ def bot_history(bot, update):
     except IndexError:
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в формате /history и аргументы :)')
     except KeyError:
-        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
+        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные данные :)')
         
         
 def run_bot(token):
