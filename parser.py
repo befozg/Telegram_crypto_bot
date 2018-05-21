@@ -62,15 +62,16 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     response = json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
     if(bool(response) is False):
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
-    dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
-    values = list(map(lambda x: x['close'], response['Data']))
-    mat_pyplot.scatter(dates, values)
-    mat_pyplot.plot_date(dates, values, '-o')
-    mat_pyplot.gcf().autofmt_xdate()
-    mat_pyplot.title(crypt_codes + ' currency')
-    mat_pyplot.xlabel('Date')
-    mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
-    mat_pyplot.savefig('tmp_fig.png')
-    mat_pyplot.close()
+    else:
+        dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
+        values = list(map(lambda x: x['close'], response['Data']))
+        mat_pyplot.scatter(dates, values)
+        mat_pyplot.plot_date(dates, values, '-o')
+        mat_pyplot.gcf().autofmt_xdate()
+        mat_pyplot.title(crypt_codes + ' currency')
+        mat_pyplot.xlabel('Date')
+        mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
+        mat_pyplot.savefig('tmp_fig.png')
+        mat_pyplot.close()
 
         
