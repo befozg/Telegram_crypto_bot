@@ -52,9 +52,8 @@ def bot_history(bot, update):
         else:
             bot.send_photo(chat_id=update.message.chat_id, photo=open('tmp_fig.png', 'rb'))
             os.remove('./tmp_fig.png')
-    except IndexError:
+    except KeyError,IndexError:
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в формате /history и аргументы :)')
-        
 
 def run_bot(token):
     """
