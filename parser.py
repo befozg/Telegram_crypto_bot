@@ -60,6 +60,8 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(
         limit) + '&toTs=' + str(end_time)
     response = json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
+    if(bool(resonse) is False):
+        raise IndexError
     dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
     values = list(map(lambda x: x['close'], response['Data']))
     mat_pyplot.scatter(dates, values)
