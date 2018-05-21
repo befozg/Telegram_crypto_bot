@@ -60,18 +60,17 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(
         limit) + '&toTs=' + str(end_time)
     response = json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
-    if(urllib.request.urlopen(request).read() is False):
-        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
-    else:
-        dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
-        values = list(map(lambda x: x['close'], response['Data']))
-        mat_pyplot.scatter(dates, values)
-        mat_pyplot.plot_date(dates, values, '-o')
-        mat_pyplot.gcf().autofmt_xdate()
-        mat_pyplot.title(crypt_codes + ' currency')
-        mat_pyplot.xlabel('Date')
-        mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
-        mat_pyplot.savefig('tmp_fig.png')
-        mat_pyplot.close()
+    if(urllib.request.urlopen(request).read()[0] == "ERROR"):
+        raise KeyError
+    dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
+    values = list(map(lambda x: x['close'], response['Data']))
+    mat_pyplot.scatter(dates, values)
+    mat_pyplot.plot_date(dates, values, '-o')
+    mat_pyplot.gcf().autofmt_xdate()
+    mat_pyplot.title(crypt_codes + ' currency')
+    mat_pyplot.xlabel('Date')
+    mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
+    mat_pyplot.savefig('tmp_fig.png')
+    mat_pyplot.close()
 
         
