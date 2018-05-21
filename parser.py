@@ -64,6 +64,8 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
         raise KeyError
     dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
     values = list(map(lambda x: x['close'], response['Data']))
+    if(not values):
+        raise KeyError
     mat_pyplot.scatter(dates, values)
     mat_pyplot.plot_date(dates, values, '-o')
     mat_pyplot.gcf().autofmt_xdate()
