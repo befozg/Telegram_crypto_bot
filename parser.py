@@ -54,14 +54,14 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     :param resolution: Шаг разделения временного промежутка (день и т.п.)
     :param crypt_to=USD: Крипт, в который надо перевести 
     :return: текущее значение crypt в эквивалентах crypt_to
-    """
+"""
     api_res = {'minute': 1, 'hour': 60, 'day': 1440}
     limit = (end_time - begin_time) // (api_res[resolution] * 60)
     request = 'https://min-api.cryptocompare.com/data/histo' + resolution + '?fsym=' + crypt_codes + '&tsym=' + crypt_to + '&limit=' + str(
         limit) + '&toTs=' + str(end_time)
     response = json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
-    if(bool(resonse) is False):
-        raise IndexError
+    if(bool(resonse)):
+        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
     dates = matplotlib.dates.date2num(list(map(lambda x: datetime.datetime.fromtimestamp(x['time']), response['Data'])))
     values = list(map(lambda x: x['close'], response['Data']))
     mat_pyplot.scatter(dates, values)
@@ -72,3 +72,5 @@ def history(crypt_codes: str, begin_time: int, end_time: int, resolution: str, c
     mat_pyplot.ylabel(crypt_codes + ' to ' + crypt_to)
     mat_pyplot.savefig('tmp_fig.png')
     mat_pyplot.close()
+
+        
