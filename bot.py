@@ -57,7 +57,10 @@ def bot_history(bot, update):
             os.remove('./tmp_fig.png')
     except IndexError:
         bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в формате /history и аргументы :)')
-
+    except KeyError:
+        bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в правильные крипты :)')
+        
+        
 def run_bot(token):
     """
     Запускает бот по token,
