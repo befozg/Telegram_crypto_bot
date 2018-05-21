@@ -47,7 +47,9 @@ def bot_history(bot, update):
         begin_time = time.mktime(date_parser.parse(message_text[1]).timetuple())
         end_time = time.mktime(date_parser.parse(message_text[2]).timetuple())
         parser.history(message_text[0], int(begin_time), int(end_time), *message_text[3:])
-        if(date_parser.parse(message_text[1]).timetuple()[0] < 2010 or 
+        if(end_time < begin_time):
+            bot.send_message(chat_id=update.message.chat_id, text='Неправильный промежуток времени! :)')
+        elif(date_parser.parse(message_text[1]).timetuple()[0] < 2010 or 
             date_parser.parse(message_text[2]).timetuple()[0] < 2010):
             bot.send_message(chat_id=update.message.chat_id, text='Вводить надо в промежутке 2010 - 2018гг. :)')
         else:
