@@ -1,0 +1,3 @@
+Памятка:
+Название бота - @Cryptobot_Karen
+Залил на сервер на Digital Ocean.
