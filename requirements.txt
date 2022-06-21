@@ -28,7 +28,7 @@ lazr.uri==1.0.3
 louis==3.0.0
 Mako==1.0.7
 MarkupSafe==1.0
-numpy==1.12.1
+numpy==1.22.0
 oauth==1.0.1
 olefile==0.44
 pexpect==4.2.1
